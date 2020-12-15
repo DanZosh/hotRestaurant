@@ -19,21 +19,32 @@ app.use(express.json());
 
 //DATA
 const dataTablesArr=[
-    {
-    name: "yoda",
-    phone: "Yoda",
-    email: "Jedi Master",
-    uniqueID: 999,
-    }
-  ];
-const dataWaitListArr=[
-    {
-    name: "darth maul",
-    phone: "maul",
-    email: "sith Master",
-    uniqueID: 1000,
-    }
-  ]
+    // {name:'pup',
+    // phone:'lump',
+    // email:'sup',
+    // id:'cup'},
+    
+    // {name:'test',
+    // phone:'crest',
+    // email:'best',
+    // id:'nest'},
+    
+    // {name:'cat',
+    // phone:'mat',
+    // email:'blat',
+    // id:'splat'},
+    
+    // {name:'car',
+    // phone:'mar',
+    // email:'blar',
+    // id:'splar'},
+    
+    // {name:'yoda',
+    // phone:'boda',
+    // email:'noda',
+    // id:'foda'}
+];
+const dataWaitListArr=[];
 
 // //PATHS 
 
@@ -55,7 +66,7 @@ app.get("/api/tables", function(req, res) {
   });
 
 // Displays all reservations
-app.get("/api/reservations", function(req, res) {
+app.get("/api/waitlist", function(req, res) {
     console.log(dataWaitListArr)
     return res.json(dataWaitListArr);
   });
@@ -72,17 +83,19 @@ app.post("/api/tables", function(req, res) {
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
     // newTable.uniquID = newCharacter.name.replace(/\s+/g, "").toLowerCase();
+
     if (dataTablesArr.length < 5){
         dataTablesArr.push(newTable)
-    }else{
+        alert("Your table is waiting!")
+    }
+    else{
         dataWaitListArr.push(newTable)
+        alert("You've been added to the wait list")
     }
     console.log(newTable);
-  
-    characters.push(newTable);
-  
+
     res.json(newTable);
-  });
+});
 
 
 app.use("/", function(req, res) {
