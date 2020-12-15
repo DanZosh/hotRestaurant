@@ -19,30 +19,30 @@ app.use(express.json());
 
 //DATA
 const dataTablesArr=[
-    // {name:'pup',
-    // phone:'lump',
-    // email:'sup',
-    // id:'cup'},
+    {name:'pup',
+    phone:'lump',
+    email:'sup',
+    id:'cup'},
     
-    // {name:'test',
-    // phone:'crest',
-    // email:'best',
-    // id:'nest'},
+    {name:'test',
+    phone:'crest',
+    email:'best',
+    id:'nest'},
     
-    // {name:'cat',
-    // phone:'mat',
-    // email:'blat',
-    // id:'splat'},
+    {name:'cat',
+    phone:'mat',
+    email:'blat',
+    id:'splat'},
     
-    // {name:'car',
-    // phone:'mar',
-    // email:'blar',
-    // id:'splar'},
+    {name:'car',
+    phone:'mar',
+    email:'blar',
+    id:'splar'},
     
-    // {name:'yoda',
-    // phone:'boda',
-    // email:'noda',
-    // id:'foda'}
+    {name:'yoda',
+    phone:'boda',
+    email:'noda',
+    id:'foda'}
 ];
 const dataWaitListArr=[];
 
@@ -76,25 +76,23 @@ app.post("/api/tables", function(req, res) {
 
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-  
     var newTable = req.body;
-  
-  
+
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
     // newTable.uniquID = newCharacter.name.replace(/\s+/g, "").toLowerCase();
 
     if (dataTablesArr.length < 5){
-        dataTablesArr.push(newTable)
-        alert("Your table is waiting!")
+        dataTablesArr.push(newTable);
+        res.json(newTable);
+        return true;
     }
     else{
-        dataWaitListArr.push(newTable)
-        alert("You've been added to the wait list")
-    }
-    console.log(newTable);
+        dataWaitListArr.push(newTable);
+        res.json(newTable);
+        return false;
+    };
 
-    res.json(newTable);
 });
 
 
