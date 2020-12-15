@@ -66,7 +66,7 @@ app.get("/api/tables", function(req, res) {
   });
 
 // Displays all reservations
-app.get("/api/waitlist", function(req, res) {
+app.get("/api/reservation", function(req, res) {
     console.log(dataWaitListArr)
     return res.json(dataWaitListArr);
   });
