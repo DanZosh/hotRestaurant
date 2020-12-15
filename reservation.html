@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-center jumbotron">
+            
+          <h1 class="text-center display-5 font-weight-bold" style="font-size: 4rem;"><img style="width: 75px;" src="assets\imgs\200px-Burger_(CoreUI_Icons_v1.0.0).svg.png" alt="">Hot Restaurant</h1>
+          <hr>
+          <h3>Make your reservation!</h3>
+          <br>
+          <a href="tables.html"><button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span> View Tables</button></a>
+          <a href=home.html""><button class="btn btn-light btn-lg"><span
+                class="fa fa-home fa-lg"></span></button></a>
+        </div>
+
+    <div class="row">
+
+        <div class="col-12">
+  
+          <div class="card mb-4">
+            <div class="bg card-header">
+              <h5>Table Reservation</h5>
+            </div>
+            <div class="card-body">
+                <h6><strong>Name</strong></h6>
+              <input type="text" id="character-search" class="form-control">
+              <br>
+                <h6><strong>Phone Number</strong></h6>
+              <input type="text" id="character-search" class="form-control">
+              <br>
+                <h6><strong>Email</strong></h6>
+              <input type="text" id="character-search" class="form-control">
+              <br>
+                <h6><strong>Unique ID</strong></h6>
+              <input type="text" id="character-search" class="form-control">
+              <br>
+              <div class="">
+                <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span
+                    class="fa fa-search"></span> Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="">API Table Link |</a>
+        <a href="">API Wait List</a>
+    </div>
+    </div>
+  
+    <script type="text/javascript">
+      $("#search-btn").on("click", function() {
+        var searchedCharacter = $("#character-search").val().trim();
+  
+        // Using a RegEx Pattern to remove spaces from searchedCharacter
+        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+  
+        $.get("/api/characters/" + searchedCharacter, function(data) {
+          console.log(data);
+          if (data) {
+            $("#stats").show();
+            $("#name").text(data.name);
+            $("#role").text(data.role);
+            $("#age").text(data.age);
+            $("#force-points").text(data.forcePoints);
+          } else {
+            $("#name").text(
+              "The force is not strong with this one. Your character was not found.");
+            $("#stats").hide();
+          }
+        });
+      });
+  
+    </script>
+</body>
+</html>
